@@ -1,0 +1,7 @@
+SCHEMA >
+    `embedding` Array(Float32) `json:$.embedding[:]`,
+    `title` String `json:$.title`,
+    `url` String `json:$.url`
+
+ENGINE MergeTree
+ENGINE_SORTING_KEY embedding, title, url
