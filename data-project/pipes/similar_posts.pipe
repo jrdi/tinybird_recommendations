@@ -3,17 +3,16 @@ TOKEN "read_endpoints" READ
 NODE endpoint
 SQL >
     %
-    SELECT pr.title title, pr.url url, L2Distance(pl.embedding, pr.embedding) similarity
-    FROM
+    WITH
         (
-            SELECT *
-            FROM posts FINAL
+            SELECT embedding
+            FROM posts
             WHERE title = {{ String(title, 'Resolving a year-long ClickHouse lock contention') }}
-        ) pl,
-        (
-            SELECT *
-            FROM posts FINAL
-            WHERE title <> {{ String(title, 'Resolving a year-long ClickHouse lock contention') }}
-        ) pr
+            ORDER BY timestamp DESC
+            LIMIT 1
+        ) AS post_embedding
+    SELECT title, url, L2Distance(embedding, post_embedding) similarity
+    FROM posts FINAL
+    WHERE title <> {{ String(title, 'Resolving a year-long ClickHouse lock contention') }}
     ORDER BY similarity ASC
     LIMIT 10
