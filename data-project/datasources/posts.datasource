@@ -6,4 +6,5 @@ SCHEMA >
 
 ENGINE ReplacingMergeTree
 ENGINE_VER timestamp
+ENGINE_PARTITION_KEY ""
 ENGINE_SORTING_KEY title, url
