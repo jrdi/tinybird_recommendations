@@ -1,7 +1,9 @@
 SCHEMA >
-    `embedding` Array(Float32) `json:$.embedding[:]`,
+    `timestamp` DateTime `json:$.timestamp`,
     `title` String `json:$.title`,
-    `url` String `json:$.url`
+    `url` String `json:$.url`,
+    `embedding` Array(Float32) `json:$.embedding[:]`
 
-ENGINE MergeTree
-ENGINE_SORTING_KEY embedding, title, url
+ENGINE ReplacingMergeTree
+ENGINE_VER timestamp
+ENGINE_SORTING_KEY title, url
