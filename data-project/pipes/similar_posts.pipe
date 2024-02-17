@@ -1,4 +1,4 @@
-TOKEN "similar_posts_endpoint_read_4576" READ
+TOKEN "read_endpoints" READ
 
 NODE endpoint
 SQL >
@@ -7,12 +7,12 @@ SQL >
     FROM
         (
             SELECT *
-            FROM posts
+            FROM posts FINAL
             WHERE title = {{ String(title, 'Resolving a year-long ClickHouse lock contention') }}
         ) pl,
         (
             SELECT *
-            FROM posts
+            FROM posts FINAL
             WHERE title <> {{ String(title, 'Resolving a year-long ClickHouse lock contention') }}
         ) pr
     ORDER BY similarity ASC
