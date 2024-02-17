@@ -5,6 +5,5 @@ SCHEMA >
     `embedding` Array(Float32) `json:$.embedding[:]`
 
 ENGINE ReplacingMergeTree
-ENGINE_VER timestamp
-ENGINE_PARTITION_KEY ""
 ENGINE_SORTING_KEY title, url
+ENGINE_VER timestamp
