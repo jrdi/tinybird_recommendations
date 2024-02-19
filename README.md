@@ -1,1 +1,1 @@
-# blogposts_recommendations
+# Tinybird recommendations

@@ -1,0 +1,4 @@
+beautifulsoup4
+feedparser
+requests
+sentence-transformers
