@@ -9,6 +9,7 @@ import json
 
 TB_APPEND_TOKEN=os.getenv("TB_APPEND_TOKEN")
 TB_READ_TOKEN=os.getenv("TB_READ_TOKEN")
+TB_HOST=os.getenv("TB_HOST")
 
 timestamp = datetime.datetime.now().isoformat()
 url = "https://www.tinybird.co/blog-posts/rss.xml"
@@ -34,7 +35,7 @@ def send_posts(posts):
         "token": TB_APPEND_TOKEN
     }
     data = "\n".join(posts)
-    r = requests.post("https://api.us-east.tinybird.co/v0/events", params=params, data=data)
+    r = requests.post(f"{TB_HOST}/v0/events", params=params, data=data)
     print(r.status_code)
 
 send_posts(posts)
@@ -44,7 +45,7 @@ def get_similars(title):
         "title": title,
         "token": TB_READ_TOKEN
     }
-    r = requests.get("https://api.us-east.tinybird.co/v0/pipes/similar_posts.json", params)
+    r = requests.get(f"{TB_HOST}/v0/pipes/similar_posts.json", params)
 
     return r.json()["data"]
 
