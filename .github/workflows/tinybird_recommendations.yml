@@ -18,7 +18,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: Generate recommendations
         run: python load.py
-        secrets:
+        with:
           TB_APPEND_TOKEN: ${{ secrets.TB_APPEND_TOKEN }}
           TB_READ_TOKEN: ${{ secrets.TB_READ_TOKEN }}
           TB_HOST: https://api.us-east.tinybird.co
