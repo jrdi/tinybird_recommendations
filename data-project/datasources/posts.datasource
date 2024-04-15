@@ -1,3 +1,5 @@
+TOKEN "append_datasources" APPEND
+
 SCHEMA >
     `timestamp` DateTime `json:$.timestamp`,
     `title` String `json:$.title`,
