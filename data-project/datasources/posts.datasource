@@ -1,3 +1,5 @@
+TOKEN "append_datasources" APPEND
+
 SCHEMA >
     `timestamp` DateTime `json:$.timestamp`,
     `title` String `json:$.title`,
@@ -5,6 +7,5 @@ SCHEMA >
     `embedding` Array(Float32) `json:$.embedding[:]`
 
 ENGINE ReplacingMergeTree
-ENGINE_PARTITION_KEY ""
 ENGINE_SORTING_KEY title, url
 ENGINE_VER timestamp

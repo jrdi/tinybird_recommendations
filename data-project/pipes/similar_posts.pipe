@@ -6,9 +6,18 @@ SQL >
     WITH
         (
             SELECT embedding
-            FROM posts
-            WHERE title = {{ String(title, 'Resolving a year-long ClickHouse lock contention') }}
-            ORDER BY timestamp DESC
+            FROM
+                (
+                    SELECT 0 AS id, embedding
+                    FROM posts
+                    WHERE
+                        title = {{ String(title, 'Resolving a year-long ClickHouse lock contention') }}
+                    ORDER BY timestamp DESC
+                    LIMIT 1
+                    UNION ALL
+                    SELECT 999 AS id, arrayWithConstant(384, 0.0) embedding
+                )
+            ORDER BY id
             LIMIT 1
         ) AS post_embedding
     SELECT title, url, L2Distance(embedding, post_embedding) similarity
